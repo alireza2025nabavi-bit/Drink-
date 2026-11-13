@@ -164,15 +164,13 @@ SHOTS = [
     dict(z=(1.00, 1.50), a=(0.5, 0.50), b=(0.5, 0.42), shake=9, flash=0.9, flick=1),    # 8 wolf leap
     dict(z=(1.40, 1.15), a=(0.62, 0.62), b=(0.45, 0.58), shake=6, flash=0.6),           # 9 skates
     dict(z=(1.15, 1.40), a=(0.35, 0.50), b=(0.55, 0.52), shake=8, flash=0.6),           # 10 rowing
-    dict(z=(1.00, 1.30), a=(0.5, 0.48), b=(0.5, 0.48), shake=10, flash=1.0, flick=1, dust=0.8),  # 11 can + wolf
+    dict(z=(1.00, 1.30), a=(0.5, 0.50), b=(0.5, 0.56), shake=10, flash=1.0, flick=1, dust=0.8),  # 11 can + wolf
     dict(z=(1.00, 1.12), a=(0.5, 0.50), b=(0.5, 0.48), shake=0, flash=1.0, dust=1.0, linear=1),  # 12 final
 ]
 
 
 def render_video(path):
-    stills = [load(i) for i in range(1, 11)] + [build_final(True), build_final(False)]
-    stills[10].save(os.path.join(HERE, "shots", "11.png"))
-    stills[11].save(os.path.join(HERE, "shots", "12.png"))
+    stills = [load(i) for i in range(1, 13)]
     ff = imageio_ffmpeg.get_ffmpeg_exe()
     cmd = [ff, "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}",
            "-r", str(FPS), "-i", "-", "-an", "-c:v", "libx264", "-preset", "medium", "-crf", "19",
